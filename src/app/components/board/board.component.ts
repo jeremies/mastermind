@@ -13,6 +13,9 @@ export class BoardComponent implements OnInit {
   constructor(private gameService: GameService) {}
 
   ngOnInit(): void {
+    this.gameService.rowsChanged.subscribe((rows) => {
+      this.rows = rows;
+    });
     this.rows = this.gameService.getRows();
   }
 }

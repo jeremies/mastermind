@@ -9,6 +9,7 @@ import { GameService } from 'src/app/services/game.service';
 })
 export class RowComponent implements OnInit {
   @Input() row: Peg[] = [];
+  @Input() index!: number;
 
   constructor() {}
 

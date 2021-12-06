@@ -1,3 +1,8 @@
 <div>
-  <app-row *ngFor="let currRow of rows" [row]="currRow"></app-row>
+  <app-row
+    *ngFor="let currRow of rows; index as i"
+    [row]="currRow"
+    [index]="i"
+  ></app-row>
+  <app-color-chooser></app-color-chooser>
 </div>

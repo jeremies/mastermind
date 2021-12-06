@@ -1,3 +1,8 @@
 <div class="row">
-  <app-peg *ngFor="let currPeg of row" [peg]="currPeg"></app-peg>
+  <app-peg
+    *ngFor="let currPeg of row; index as i"
+    [peg]="currPeg"
+    [index]="i"
+    [rowIndex]="index"
+  ></app-peg>
 </div>
