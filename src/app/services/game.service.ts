@@ -8,8 +8,7 @@ import { Peg } from '../models/peg.model';
 export class GameService {
   rowsChanged = new Subject<Peg[][]>();
   private rows: Peg[][] = [
-    [new Peg(0), new Peg(1), new Peg(2), new Peg(3)],
-    [new Peg(2), new Peg(3), new Peg(0), new Peg(1)],
+    [new Peg(-1), new Peg(-1), new Peg(-1), new Peg(-1)],
   ];
 
   colorChooserChanged = new Subject<{ style: object }>();
@@ -69,5 +68,16 @@ export class GameService {
     ] = new Peg(newColor);
     this.rowsChanged.next(this.rows);
     this.closeColorChooser();
+  }
+
+  check() {
+    let secretCode = [0, 1, 2, 3];
+    let correct = this.rows[this.rows.length - 1].every(
+      (peg, i) => peg.color === secretCode[i]
+    );
+    if (!correct) {
+      this.rows.push([new Peg(-1), new Peg(-1), new Peg(-1), new Peg(-1)]);
+      this.rowsChanged.next(this.rows);
+    }
   }
 }

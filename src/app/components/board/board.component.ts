@@ -18,4 +18,8 @@ export class BoardComponent implements OnInit {
     });
     this.rows = this.gameService.getRows();
   }
+
+  check() {
+    this.gameService.check();
+  }
 }
