@@ -1,3 +1,6 @@
 <div class="scores">
-  <app-score-peg *ngFor="let score of scores"></app-score-peg>
+  <app-score-peg
+    [score]="currScore"
+    *ngFor="let currScore of scores"
+  ></app-score-peg>
 </div>

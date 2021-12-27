@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { ScorePegComponent } from '../components/score-peg/score-peg.component';
 import { Peg } from '../models/peg.model';
 import { Score } from '../models/score.model';
+import * as _ from 'lodash';
 
 @Injectable({
   providedIn: 'root',
@@ -35,8 +36,16 @@ export class GameService {
     return this.rows.slice();
   }
 
+  getLastRow() {
+    return this.rows[this.rows.length - 1].slice();
+  }
+
   getScores() {
     return this.scores.slice();
+  }
+
+  getLastScore() {
+    return this.scores[this.scores.length - 1].slice();
   }
 
   getColorChooser() {
@@ -82,10 +91,22 @@ export class GameService {
 
   check() {
     let secretCode = [0, 1, 2, 3];
-    let correct = this.rows[this.rows.length - 1].every(
-      (peg, i) => peg.color === secretCode[i]
-    );
-    if (!correct) {
+    let guess = this.getLastRow().map((peg) => peg.color);
+    let scoreTotals = this.calculateScore(secretCode, guess);
+    let score = [];
+    for (let i = 0; i < scoreTotals.correctColor; i++) {
+      score.push(new Score(0));
+    }
+    for (let i = 0; i < scoreTotals.correct; i++) {
+      score.push(new Score(1));
+    }
+    while (score.length < 4) {
+      score.push(new Score(-1));
+    }
+    this.scores[this.scores.length - 1] = score;
+    this.scoresChanged.next(this.scores);
+
+    if (scoreTotals.correct < 4) {
       this.rows.push([new Peg(-1), new Peg(-1), new Peg(-1), new Peg(-1)]);
       this.rowsChanged.next(this.rows);
       this.scores.push([
@@ -96,5 +117,21 @@ export class GameService {
       ]);
       this.scoresChanged.next(this.scores);
     }
+  }
+
+  calculateScore(secretCode: Number[], guess: Number[]) {
+    let perfectMatches = guess.filter((color, i) => color === secretCode[i]);
+    let correct = perfectMatches.length;
+
+    let secretCodeCountByColors = _.countBy(secretCode);
+    let guessCountByColors = _.countBy(guess);
+    let totalColorMatches = 0;
+    for (let color in guessCountByColors) {
+      let secretCodeCount = secretCodeCountByColors[color] ?? 0;
+      totalColorMatches += Math.min(secretCodeCount, guessCountByColors[color]);
+    }
+    let correctColor = totalColorMatches - correct;
+
+    return { correct, correctColor };
   }
 }

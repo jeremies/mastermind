@@ -7,4 +7,9 @@ export class Constants {
     4: 'magenta',
     5: 'blue',
   };
+
+  public static readonly scoreColorScheme: any = {
+    0: 'red',
+    1: 'black',
+  };
 }
