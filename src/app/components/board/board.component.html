@@ -1,9 +1,8 @@
 <div>
   <button class="checkButton" (click)="check()">Check</button>
-  <app-row
-    *ngFor="let currRow of rows; index as i"
-    [row]="currRow"
-    [index]="i"
-  ></app-row>
+  <div class="rowWithScores" *ngFor="let currRow of rows; index as i">
+    <app-row [row]="currRow" [index]="i"></app-row>
+    <app-scores [scores]="scores[i]"></app-scores>
+  </div>
   <app-color-chooser></app-color-chooser>
 </div>

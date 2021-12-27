@@ -7,6 +7,8 @@ import { PegComponent } from './components/peg/peg.component';
 import { RowComponent } from './components/row/row.component';
 import { BoardComponent } from './components/board/board.component';
 import { ColorChooserComponent } from './components/color-chooser/color-chooser.component';
+import { ScorePegComponent } from './components/score-peg/score-peg.component';
+import { ScoresComponent } from './components/scores/scores.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { ColorChooserComponent } from './components/color-chooser/color-chooser.
     PegComponent,
     RowComponent,
     BoardComponent,
-    ColorChooserComponent
+    ColorChooserComponent,
+    ScorePegComponent,
+    ScoresComponent
   ],
   imports: [
     BrowserModule,

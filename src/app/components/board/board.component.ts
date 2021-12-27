@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Peg } from 'src/app/models/peg.model';
+import { Score } from 'src/app/models/score.model';
 import { GameService } from 'src/app/services/game.service';
 
 @Component({
@@ -9,6 +10,7 @@ import { GameService } from 'src/app/services/game.service';
 })
 export class BoardComponent implements OnInit {
   rows: Peg[][] = [];
+  scores: Score[][] = [];
 
   constructor(private gameService: GameService) {}
 
@@ -17,6 +19,10 @@ export class BoardComponent implements OnInit {
       this.rows = rows;
     });
     this.rows = this.gameService.getRows();
+    this.gameService.scoresChanged.subscribe((scores) => {
+      this.scores = scores;
+    });
+    this.scores = this.gameService.getScores();
   }
 
   check() {
