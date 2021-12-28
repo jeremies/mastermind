@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { ScorePegComponent } from '../components/score-peg/score-peg.component';
 import { Peg } from '../models/peg.model';
 import { Score } from '../models/score.model';
 import * as _ from 'lodash';
@@ -53,6 +52,10 @@ export class GameService {
   }
 
   showColorChooser(targetEl: any, pegCoordinates: { x: number; y: number }) {
+    if (pegCoordinates.y !== this.getRows().length - 1) {
+      return;
+    }
+
     this.currentPegCoordinates = pegCoordinates;
 
     let myTop, myLeft;
@@ -90,6 +93,8 @@ export class GameService {
   }
 
   check() {
+    this.closeColorChooser();
+
     let secretCode = [0, 1, 2, 3];
     let guess = this.getLastRow().map((peg) => peg.color);
     let scoreTotals = this.calculateScore(secretCode, guess);

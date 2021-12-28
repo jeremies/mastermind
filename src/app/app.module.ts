@@ -18,13 +18,10 @@ import { ScoresComponent } from './components/scores/scores.component';
     BoardComponent,
     ColorChooserComponent,
     ScorePegComponent,
-    ScoresComponent
+    ScoresComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
