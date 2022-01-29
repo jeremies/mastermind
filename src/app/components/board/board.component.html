@@ -2,7 +2,7 @@
   <div>
     <button>exit</button>
   </div>
-  <div class="rows">
+  <div class="rows" (scroll)="closeColorChooser()">
     <div class="rowWithScores" *ngFor="let currRow of rows; index as i">
       <app-row [row]="currRow" [index]="i"></app-row>
       <div class="verticalLine"></div>

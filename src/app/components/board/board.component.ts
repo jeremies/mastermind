@@ -28,4 +28,8 @@ export class BoardComponent implements OnInit {
   check() {
     this.gameService.check();
   }
+
+  closeColorChooser() {
+    this.gameService.closeColorChooser();
+  }
 }

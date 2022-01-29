@@ -62,8 +62,12 @@ export class GameService {
 
     let myTop, myLeft;
     const targetRect = targetEl.getBoundingClientRect();
-    myTop = window.scrollY + targetRect.top + targetRect.height;
+    myTop = window.scrollY + targetRect.top - 85;
     myLeft = targetRect.right - targetRect.width / 2;
+
+    if (myTop - 85 < 0) {
+      myTop += 85 + targetRect.height;
+    }
 
     this.colorChooser = {
       style: {
@@ -117,8 +121,9 @@ export class GameService {
         currentScore.correct !== expectedScore.correct ||
         currentScore.correctColor !== expectedScore.correctColor
       ) {
-        alert('mal!' + i);
-        return;
+        // TODO activar això
+        // alert('mal!' + i);
+        // return;
       }
       i++;
     }
