@@ -1,0 +1,54 @@
+.title {
+  text-align: center;
+  border: 1px solid black;
+  width: 300px;
+  margin: 20px;
+  font-family: "Teko", sans-serif;
+  font-weight: bold;
+  border-radius: 10px;
+  font-size: 25px;
+}
+
+.title-line {
+  margin: 0;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  text-decoration: none;
+  color: white;
+  margin: 20px;
+  font-size: 20px;
+  font-family: Ubuntu, "Helvetica Neue", sans-serif;
+  border: 0;
+  padding: 20px;
+  cursor: pointer;
+  text-transform: uppercase;
+
+  &:hover {
+    transform: translate3d(0px, -0.25em, 0px);
+    transition: transform 0.2s ease 0s;
+  }
+}
+
+.new-game {
+  background-color: brown;
+}
+
+.how-to-play {
+  background-color: rgb(52, 73, 95);
+}

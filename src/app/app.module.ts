@@ -9,6 +9,8 @@ import { BoardComponent } from './components/board/board.component';
 import { ColorChooserComponent } from './components/color-chooser/color-chooser.component';
 import { ScorePegComponent } from './components/score-peg/score-peg.component';
 import { ScoresComponent } from './components/scores/scores.component';
+import { HomeComponent } from './pages/home/home.component';
+import { PlayGameComponent } from './pages/play-game/play-game.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { ScoresComponent } from './components/scores/scores.component';
     ColorChooserComponent,
     ScorePegComponent,
     ScoresComponent,
+    HomeComponent,
+    PlayGameComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
