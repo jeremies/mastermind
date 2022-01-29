@@ -31,7 +31,7 @@ export class GameService {
     y: -1,
   };
 
-  secretCode: Number[] = [_.random(3), _.random(3), _.random(3), _.random(3)];
+  secretCode: Number[] = [_.random(5), _.random(5), _.random(5), _.random(5)];
 
   getRows() {
     return this.rows.slice();
@@ -98,6 +98,31 @@ export class GameService {
     this.closeColorChooser();
 
     let guess = this.getLastRow().map((peg) => peg.color);
+
+    let rows = this.getRows();
+    let evaluatedRows = rows.slice(0, rows.length - 1);
+
+    let i = 0;
+    for (let row of evaluatedRows) {
+      let rowCode = row.map((peg) => peg.color);
+      let currentScore = this.calculateScore(guess, rowCode);
+      let expectedScore = _.countBy(
+        this.getScores()[i].map((score) => score.score)
+      );
+      expectedScore = {
+        correct: expectedScore[1] ?? 0,
+        correctColor: expectedScore[0] ?? 0,
+      };
+      if (
+        currentScore.correct !== expectedScore.correct ||
+        currentScore.correctColor !== expectedScore.correctColor
+      ) {
+        alert('mal!' + i);
+        return;
+      }
+      i++;
+    }
+
     let scoreTotals = this.calculateScore(this.secretCode, guess);
     let score = [];
     for (let i = 0; i < scoreTotals.correctColor; i++) {
